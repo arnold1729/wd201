@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="registration.css">
+    
+    
+</head>
+<body>
+    <a href="./project">&lt;- Projects</a>
+    <a href="/">&lt;- Back to home</a>
+    <div id="div1">
+        <h1>Registration Form</h1>
+        
+        <form onsubmit="return saveData()">
+            <p>
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="Enter full Name" name="Name" required>
+            </p>
+            <p>
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter email" name="Email" required>
+            </p>
+            <p>    
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter password" name="Password" required>
+            </p>
+            <p>
+                <label for="dob">Date of Birth</label>
+                <input type="date" name="DOB" id="dob">
+            </p>
+            <p id="iagree">
+                <input type="checkbox" id="agree-to-terms" required>
+                <label for="agree-to-terms">Accept Terms & Conditions</label>
+            </p>
+            <input type="submit" id="submit" value="Submit"/>
+        </form>
+    </div>
+
+
+    <div id="div2">
+        <h1>Entries</h1>
+        <table id="datatable">
+            <thead>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Dob</th>
+                <th>Accepted terms?</th>
+            </thead>
+
+            <tbody>
+                <!-- rows to be added automatically -->
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+    <script src="registration.js"></script>
+</body>
+</html>
