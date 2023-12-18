@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
-
 const todoList = require("../todo");
 
-const { all, markAsComplete, add } = todoList();
+const { all, markAsComplete, add, overdue, dueToday, dueLater } = todoList();
+
 const formattedDate = (d) => {
   return d.toISOString().split("T")[0];
 };
