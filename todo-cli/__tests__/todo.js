@@ -19,7 +19,7 @@ const tomorrow = formattedDate(
   new Date(new Date().setDate(dateToday.getDate() + 1)),
 );
 
-describe("Todolist Test Suite", () => {
+describe("This is a Todolist Test Suite", () => {
   beforeAll(() => {
     [
       {
@@ -39,7 +39,7 @@ describe("Todolist Test Suite", () => {
       },
     ].forEach(add);
   });
-  test("Should add new todo", () => {
+  test("This test should add new todo", () => {
     const cnt = all.length;
     expect(all.length).toBe(cnt);
     add({
@@ -50,21 +50,21 @@ describe("Todolist Test Suite", () => {
     expect(all.length).toBe(cnt + 1);
   });
 
-  test("Should mark a todo as complete", () => {
+  test("This test should mark a todo as complete", () => {
     expect(all[1].completed).toBe(false);
     markAsComplete(1);
     expect(all[1].completed).toBe(true);
   });
 
-  test("overdue test", () => {
+  test("This is an overdue test", () => {
     expect(overdue().length).toBe(1);
   });
 
-  test("dueToday test", () => {
+  test("The tests which are dueToday test", () => {
     expect(dueToday().length).toBe(2);
   });
 
-  test("duelater test", () => {
+  test("The tests that are duelater test", () => {
     expect(dueLater().length).toBe(1);
   });
 });
