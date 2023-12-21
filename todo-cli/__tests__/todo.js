@@ -23,31 +23,31 @@ describe("This is a Todolist Test Suite", () => {
   beforeAll(() => {
     [
       {
-        title: "Breakfast",
+        title: "Morning",
         completed: false,
         dueDate: yesterday,
       },
       {
-        title: "Lunch",
+        title: "Afternoon",
         completed: false,
         dueDate: today,
       },
       {
-        title: "Dinner",
+        title: "Night",
         completed: false,
         dueDate: tomorrow,
       },
     ].forEach(add);
   });
   test("This test should add new todo", () => {
-    const cnt = all.length;
-    expect(all.length).toBe(cnt);
+    const counts = all.length;
+    expect(all.length).toBe(counts);
     add({
       title: "Test todo",
       completed: false,
       dueDate: today,
     });
-    expect(all.length).toBe(cnt + 1);
+    expect(all.length).toBe(counts + 1);
   });
 
   test("This test should mark a todo as complete", () => {
