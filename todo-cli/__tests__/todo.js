@@ -1,76 +1,72 @@
 /* eslint-disable no-undef */
-const createTodoManager = require("../todo");
+//rushabhs code
 
-const {
-  fetchAll,
-  completeTodo,
-  add,
-  overdueTodos,
-  TodosDueToday,
-  TodosDueLater,
-} = createTodoManager();
+const todoList = require("../todo");
 
-const currentDate = new Date();
+const { all, markAsComplete, add, overdue, dueToday, dueLater } = todoList();
 
-const todayDate = new Date(currentDate);
-todayDate.setHours(0, 0, 0, 0);
+const formattedDate = (d) => {
+  return d.toISOString().split("T")[0];
+};
 
-const yesterdayDate = new Date(currentDate);
-yesterdayDate.setDate(currentDate.getDate() - 1);
-yesterdayDate.setHours(0, 0, 0, 0);
+var dateToday = new Date();
 
-const tomorrowDate = new Date(currentDate);
-tomorrowDate.setDate(currentDate.getDate() + 1);
-tomorrowDate.setHours(0, 0, 0, 0);
+const today = formattedDate(dateToday);
 
-describe("Customized Todolist Testing Suite", () => {
+const yesterday = formattedDate(
+  new Date(new Date().setDate(dateToday.getDate() - 1)),
+);
+
+const tomorrow = formattedDate(
+  new Date(new Date().setDate(dateToday.getDate() + 1)),
+);
+
+describe("Todolist test Suite", () => {
   beforeAll(() => {
-    const Todos = [
+    [
       {
-        title: "Morning yoga",
+        title: "Subah ki chai",
         completed: false,
-        dueDate: yesterdayDate.toISOString().split("T")[0],
+        dueDate: yesterday,
       },
       {
-        title: "100 pushups",
+        title: "Shaam ki Chai",
         completed: false,
-        dueDate: todayDate.toISOString().split("T")[0],
+        dueDate: today,
       },
       {
-        title: "Make paneer tikka",
+        title: "Raat ki chai",
         completed: false,
-        dueDate: tomorrowDate.toISOString().split("T")[0],
+        dueDate: tomorrow,
       },
-    ];
-    Todos.forEach((Todo) => add(Todo));
+    ].forEach(add);
   });
-
-  test("Adding a new Todo", () => {
-    const initialTodoCount = fetchAll().length;
-    expect(fetchAll().length).toBe(initialTodoCount);
+  test("Should add new todo", () => {
+    const cnt = all.length;
+    expect(all.length).toBe(cnt);
     add({
-      title: "Adding a test Todo",
+      title: "The  test for todos",
       completed: false,
-      dueDate: todayDate.toISOString().split("T")[0],
+      dueDate: today,
     });
-    expect(fetchAll().length).toBe(initialTodoCount + 1);
+    expect(all.length).toBe(cnt + 1);
   });
 
-  test("Marking a Todo as completed", () => {
-    expect(fetchAll()[1].completed).toBe(false);
-    completeTodo(1);
-    expect(fetchAll()[1].completed).toBe(true);
+  test("Mark a todo as completed", () => {
+    expect(all[1].completed).toBe(false);
+    markAsComplete(1);
+    expect(all[1].completed).toBe(true);
   });
 
-  test("Checking overdue Todos", () => {
-    expect(overdueTodos().length).toBe(2);
+  test("Overdue test", () => {
+    expect(overdue().length).toBe(1);
   });
 
-  test("Todos due today", () => {
-    expect(TodosDueToday().length).toBe(1);
+  test("DueToday test", () => {
+    expect(dueToday().length).toBe(2);
   });
 
-  test("Todos due later", () => {
-    expect(TodosDueLater().length).toBe(0);
+  test("Duelater test", () => {
+    expect(dueLater().length).toBe(1);
   });
 });
