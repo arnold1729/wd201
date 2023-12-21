@@ -28,18 +28,18 @@ describe("Customized Todolist Testing Suite", () => {
     const Todos = [
       {
         title: "Morning yoga",
-        done: false,
-        deadline: yesterdayDate.toISOString().split("T")[0],
+        completed: false,
+        dueDate: yesterdayDate.toISOString().split("T")[0],
       },
       {
         title: "100 pushups",
-        done: false,
-        deadline: todayDate.toISOString().split("T")[0],
+        completed: false,
+        dueDate: todayDate.toISOString().split("T")[0],
       },
       {
         title: "Make paneer tikka",
-        done: false,
-        deadline: tomorrowDate.toISOString().split("T")[0],
+        completed: false,
+        dueDate: tomorrowDate.toISOString().split("T")[0],
       },
     ];
     Todos.forEach((Todo) => add(Todo));
@@ -50,16 +50,16 @@ describe("Customized Todolist Testing Suite", () => {
     expect(fetchAll().length).toBe(initialTodoCount);
     add({
       title: "Adding a test Todo",
-      done: false,
-      deadline: todayDate.toISOString().split("T")[0],
+      completed: false,
+      dueDate: todayDate.toISOString().split("T")[0],
     });
     expect(fetchAll().length).toBe(initialTodoCount + 1);
   });
 
-  test("Marking a Todo as done", () => {
-    expect(fetchAll()[1].done).toBe(false);
+  test("Marking a Todo as completed", () => {
+    expect(fetchAll()[1].completed).toBe(false);
     completeTodo(1);
-    expect(fetchAll()[1].done).toBe(true);
+    expect(fetchAll()[1].completed).toBe(true);
   });
 
   test("Checking overdue Todos", () => {
