@@ -1,51 +1,40 @@
-const todoList = () => {
+/* eslint-disable no-unused-vars */
+const createTodoManager = () => {
   const all = [];
 
   const add = (todoItem) => {
     all.push(todoItem);
   };
 
-  const markAsComplete = (index) => {
-    all[index].completed = true;
+  const completeTodo = (index) => {
+    all[index].done = true;
   };
 
-  const overdue = () => {
+  const overdueTodos = () => {
     const today = new Date().toISOString().split("T")[0];
-    return all.filter((item) => !item.completed && item.dueDate < today);
+    return all.filter((item) => !item.done && item.deadline < today);
   };
 
-  const dueToday = () => {
+  const TodosDueToday = () => {
     const today = new Date().toISOString().split("T")[0];
-    return all.filter((item) => item.dueDate === today);
+    return all.filter((item) => item.deadline === today);
   };
 
-  const dueLater = () => {
+  const TodosDueLater = () => {
     const today = new Date().toISOString().split("T")[0];
-    return all.filter((item) => !item.completed && item.dueDate > today);
+    return all.filter((item) => !item.done && item.deadline > today);
   };
 
-  const toDisplayableList = (list) => {
-    return list
-      .map((item) => {
-        let checkbox = item.completed ? "[x]" : "[ ]";
-        const formattedDate =
-          item.dueDate !== new Date().toISOString().split("T")[0]
-            ? " " + item.dueDate
-            : "";
-        return `${checkbox} ${item.title}${formattedDate}`;
-      })
-      .join("\n");
-  };
+  const fetchAll = () => all;
 
   return {
-    all,
+    fetchAll,
     add,
-    markAsComplete,
-    overdue,
-    dueToday,
-    dueLater,
-    toDisplayableList,
+    completeTodo,
+    overdueTodos,
+    TodosDueToday,
+    TodosDueLater,
   };
 };
 
-module.exports = todoList;
+module.exports = createTodoManager;
