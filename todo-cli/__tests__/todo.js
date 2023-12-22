@@ -1,70 +1,59 @@
 /* eslint-disable no-undef */
-const todoList = require("../todo");
-
+let todoList = require("../todo");
 const { all, markAsComplete, add, overdue, dueToday, dueLater } = todoList();
-
-const formattedDate = (d) => {
-  return d.toISOString().split("T")[0];
-};
-
-var dateToday = new Date();
-
-const today = formattedDate(dateToday);
-
-const yesterday = formattedDate(
-  new Date(new Date().setDate(dateToday.getDate() - 1)),
-);
-
-const tomorrow = formattedDate(
-  new Date(new Date().setDate(dateToday.getDate() + 1)),
-);
-
-describe("Todolist test Suite", () => {
+describe("Todo test cases", () => {
   beforeAll(() => {
+    const today = new Date();
+    const oneDay = 60 * 60 * 24 * 1000;
     [
       {
-        title: "Subah chai",
+        title: "Driving test",
         completed: false,
-        dueDate: yesterday,
+        dueDate: new Date(today.getTime() - 1 * oneDay).toLocaleDateString(
+          "en-CA",
+        ),
       },
       {
-        title: "Sham chai",
+        title: "Endsem study",
         completed: false,
-        dueDate: today,
+        dueDate: new Date().toLocaleDateString("en-CA"),
       },
       {
-        title: "Raat chai",
+        title: "100 pushups",
         completed: false,
-        dueDate: tomorrow,
+        dueDate: new Date(today.getTime() + 1 * oneDay).toLocaleDateString(
+          "en-CA",
+        ),
       },
     ].forEach(add);
   });
-  test("Should add new todo", () => {
-    const cnot = all.length;
-    expect(all.length).toBe(cnot);
+  test("Add a new todo", () => {
+    expect(all.length).toEqual(3);
+
     add({
-      title: "todo test",
+      title: "Make Paneer tikka",
       completed: false,
-      dueDate: today,
+      dueDate: new Date().toLocaleDateString("en-CA"),
     });
-    expect(all.length).toBe(cnot + 1);
+
+    expect(all.length).toBe(4);
   });
 
-  test("mark a todo as completed", () => {
-    expect(all[1].completed).toBe(false);
-    markAsComplete(1);
-    expect(all[1].completed).toBe(true);
+  test("Todo mark as complete test", () => {
+    expect(all[0].completed).toBe(false);
+    markAsComplete(0);
+    expect(all[0].completed).toEqual(true);
   });
 
   test("overdue test", () => {
-    expect(overdue().length).toBe(1);
+    expect(overdue().length).toBe(0);
   });
 
-  test("dueToday test", () => {
+  test("due today test", () => {
     expect(dueToday().length).toBe(2);
   });
 
-  test("duelater test", () => {
+  test("due later test", () => {
     expect(dueLater().length).toBe(1);
   });
 });
