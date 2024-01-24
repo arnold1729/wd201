@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 const request = require("supertest");
 const cheerio = require("cheerio");
@@ -48,7 +47,7 @@ describe("Todo test suite", () => {
     expect(res.statusCode).toBe(302);
   });
 
-  /*test("Sign out", async () => {
+  test("Sign out", async () => {
     let res = await agent.get("/todos");
     expect(res.statusCode).toBe(200);
 
@@ -157,5 +156,5 @@ describe("Todo test suite", () => {
     });
     const parsedUpdateResponse = Boolean(response.text);
     expect(parsedUpdateResponse).toBe(true);
-  });*/
+  });
 });
